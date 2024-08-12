@@ -1,8 +1,9 @@
 
 import { useState } from "react";
 import styles from "./heroes.module.css";
+import HeroDetail from "../hero-detail/hero-detail";
 
-interface Hero {
+export interface Hero {
    id: number;
    name: string;
 }
@@ -20,19 +21,8 @@ const HEROES: Hero[] = [
 ];
 
 export default function Heroes() {
-   // const initHero: Hero = {
-   //    id: 1,
-   //    name: 'Windstorm'
-   // };
 
-   // const [hero, setHero] = useState(initHero);
-   const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
-      if (selectedHero) {
-         setSelectedHero({ ...selectedHero, name: e.target.value });
-      }   
-   }
-
-   const [selectedHero, setSelectedHero] = useState<Hero | null>(null);
+   const [data, setSelectedHero] = useState<Hero | null>(null);
    const onSelect = (hero: Hero) => {
       setSelectedHero(hero);
    }
@@ -53,17 +43,7 @@ export default function Heroes() {
             )}
          </ul>
 
-         {selectedHero && (
-            <>
-               <h2>{selectedHero.name} Details</h2>
-               <div><span>id: </span>{selectedHero.id}</div>
-               <div>
-                  <label>Hero name: </label>
-                  <input type="text" value={selectedHero.name} onChange={onChangeName} />
-               </div>
-            </>
-         )}
-
+         <HeroDetail selectedHero={data}/>
 
       </>
    );
